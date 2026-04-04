@@ -1,253 +1,693 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🛋️ Đồ Nội Thất Store</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vy Food</title>
+    <link href='./assets/img/favicon.png' rel='icon' type='image/x-icon' />
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/home-responsive.css">
+    <link rel="stylesheet" href="./assets/css/toast-message.css">
+    <link rel="stylesheet" href="./assets/font/font-awesome-pro-v6-6.2.0/css/all.min.css"/>
 </head>
 <body>
-
-<header class="navbar">
-  <div class="nav-container">
-    <a class="nav-logo" href="index.html">
-      <div class="logo-mark">🛋️</div>
-      <div class="logo-text">Đồ Nội Thất <span>Store</span></div>
-    </a>
-
-    <nav class="main-nav">
-      <a href="#" onclick="filterCategory('all');return false;">Tất cả</a>
-      <a href="#" onclick="filterCategory('Phòng khách');return false;">Phòng khách</a>
-      <a href="#" onclick="filterCategory('Phòng ngủ');return false;">Phòng ngủ</a>
-      <a href="#" onclick="filterCategory('Phòng bếp');return false;">Phòng bếp</a>
-      <a href="#" onclick="filterCategory('Văn phòng');return false;">Văn phòng</a>
-      <a href="#" onclick="filterCategory('Trang trí');return false;">Trang trí</a>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-left">
+                    <ul class="header-top-list">
+                        <li><a href=""><i class="fa-regular fa-phone"></i> 0123 456 789 (miễn phí)</a></li>
+                        <li><a href=""><i class="fa-light fa-location-dot"></i> Xem vị trí cửa hàng</a></li>
+                    </ul>
+                </div>
+                <div class="header-top-right">
+                    <ul class="header-top-list">
+                        <li><a href="">Giới thiệu</a></li>
+                        <li><a href="">Cửa hàng</a></li>
+                        <li><a href="">Chính sách</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-middle-left">
+                    <div class="header-logo">
+                        <a href="">
+                            <img src="./assets/img/vy-food.png" alt="" class="header-logo-img">
+                        </a>
+                    </div>
+                </div>
+                <div class="header-middle-center">
+                    <form action="" class="form-search">
+                        <span class="search-btn"><i class="fa-light fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-search-input" placeholder="Tìm kiếm món ăn..."
+                            oninput="searchProducts()">
+                        <button class="filter-btn"><i class="fa-light fa-filter-list"></i><span>Lọc</span></button>
+                    </form>
+                </div>
+                <div class="header-middle-right">
+                    <ul class="header-middle-right-list">
+                        <li class="header-middle-right-item dnone open" onclick="openSearchMb()">
+                            <div class="cart-icon-menu">
+                                <i class="fa-light fa-magnifying-glass"></i>
+                            </div>
+                        </li>
+                        <li class="header-middle-right-item close" onclick="closeSearchMb()">
+                            <div class="cart-icon-menu">
+                                <i class="fa-light fa-circle-xmark"></i>
+                            </div>
+                        </li>
+                        <li class="header-middle-right-item dropdown open">
+                            <i class="fa-light fa-user"></i>
+                            <div class="auth-container">
+                                <span class="text-dndk">Đăng nhập / Đăng ký</span>
+                                <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                            </div>
+                            <ul class="header-middle-right-menu">
+                                <li><a id="login" href="javascript:;"><i class="fa-light fa-right-to-bracket"></i> Đăng nhập</a></li>
+                                <li><a id="signup" href="javascript:;"><i class="fa-light fa-user-plus"></i> Đăng ký</a></li>
+                            </ul>
+                        </li>
+                        <li class="header-middle-right-item open" onclick="openCart()">
+                            <div class="cart-icon-menu">
+                                <i class="fa-light fa-basket-shopping"></i>
+                                <span class="count-product-cart">0</span>
+                            </div>
+                            <span>Giỏ hàng</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav class="header-bottom">
+        <div class="container">
+            <ul class="menu-list">
+                <li class="menu-list-item"><a href="" class="menu-link">Trang chủ</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món chay')"><a href="javascript:;" class="menu-link">Món chay</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món mặn')"><a href="javascript:;" class="menu-link">Món mặn</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món lẩu')"><a href="javascript:;" class="menu-link">Món lẩu</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món ăn vặt')"><a href="javascript:;" class="menu-link">Món ăn vặt</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món tráng miệng')"><a href="javascript:;" class="menu-link">Món tráng miệng</a></li>
+                <li class="menu-list-item" onclick="showCategory('Nước uống')"><a href="javascript:;" class="menu-link">Nước uống</a></li>
+                <li class="menu-list-item" onclick="showCategory('Món khác')"><a href="javascript:;" class="menu-link">Món khác</a></li>
+            </ul>
+        </div>
     </nav>
-
-    <div class="nav-user" onclick="toggleDropdown()">
-      <img id="avatar" class="user-avatar" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXU1NT////R0dHV1dX09PTf39/8/Pzb29vu7u7x8fHl5eX5+fnc3Nzr6+vi4uLw8PCR9fa8AAAFQElEQVR4nO2d6ZKjMAyEjQzmSsj7v+2gMBnIHcCy2hl9Vbs/9qiaLtmSfDXOGYZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhGIZhbIOI/n59D97z76MmXw/dsS2Z9tgNtf/VOf2DvCFXd20fimtC33a1yzyYU3Sq5lbcQmZTLf5ljlDd9E/lTfRNnXEgq/KNvImy0v5Bt0HVu/AtAlllF0dPh7J4Pv9uCUVZU1aTkVzzsboLTU6Jdc0AncloqNKxWDFCL4z/45iHRPKfZdBHlD4DjVSvD98ikPDF0VO1Qx9ToefUvQJHidoSXkJV2DNGmRCgU+r+CIJHsY4isChqbSHP8Fvq/CN61GSzvQ7eUmpLeQh3MtEA7G58pCxzoQJc9++uE0tC0JZzB61fLr2mQRunh8gCi+KgLekaKmOOUSaUWEGMm2YmoFobilcKZ5CCuHvJ9BigIIqEECiIPlrHfUuNUvaj18ILODUxajszg9PYyOQZBiTX0ElM4QlkmMqMUQZkmEplUgZjP6MTjGGnLY6hVkxgUbQIE5Fi7T89okdQ6AUFFoV+U+MF1r5LDgCNWyeqECDVRN1EvAdgW1Gs7Z4AaL4FezYGoG8TWv1eAFgFm0JTaAoBFEo23hCt9z+oh8Jdm75CN4gqHLTlCW4HTyBsCn/7+pDX+IL7NBBrfMlyEQCKheMlsFQQA8IC2P2H/VISnIcQg/Q/nFt8/dmT3NEMyMGM84JnwAgFn5E7x0fh2+9iOKlcA5NnnND5E0RP+kcVvXMLUCEUmYlIs3CEBO6XYin8B3eEKXJjEwBflMa+q4/Ht7+3YNa83n5FAH0zM7an0d494TSk11C0t2uYYzTGE9kJ5IeyUSRCvyHdLTGgC9z9EjgEtGbtDu/2vsfHnYN/7PJU0P7hP2NzdwPaydzjN3ubZBJCx+4fG/xpcnD9WMAeQ2so4XPoPcQ+WJ/k1cBeWPnp4+N3+tjri7K1bKP6+Nav7QjbZ3+Cd+QOp9eee5Rr+H7hwUrsm3gfvLarKd/heQP7XLL3ZdMyJ/a+/DKPzylSZ+dSOjuYum+JnWEYhmEYf0xlnr27L8x/lj+jDH/omrbvF9uMIfR923QH7zJXSZNZ+au109m2PFeV5IZ2Ctuz5dPv37YD4IHvS85dth/WbNSUg8+rG6f6hdX8k3hm5M1ONGw7Ku2HPGbktu3gX434e27TdvfWs5mAr5Hq/be/SuT5GOnCCeYBjeePBUS7i3EgD1c5KPqNIbRAstd8vJtt4ew/jxTFcYRGv0GLdRhF8V93haIDOjAV8jfByal0EnmfF2CePVEr9AAxYNz19qKmCi3CXBwjKPYAMRStsjovbalwvtGuGsZRoNwLUiYoX9pnywhphYrGEV72kfNMrbaBQ07SUHCmV+vChc13ZrTKorBvyxKlqbjrquw6gsbzBNle5pZSo7dJN0aZ9AYZ3qcbo0xI/lVd8W7tluStTZpavyRxshF2aXtEYjOe9CFMHMT4n5V5T9oPz9TCK4qHClMGUdh39hkpN6bSR5AJ6Upi2nZmJlljk7QjXZIs12jkGSZZrqGjmsJE+/yiH0N4TSLLGo1+5kKaYaqVSZkk2VQtkzJpsqlOmplI4lGnOQ3TTEQ5u9L3JDE0Tb59cU2CzQzVRJMm1ejVe6aXF+gVpyFPRPkVlOzHj94j/5lgWZP594jb0At//Og90ssLOb/ZTxH3pVXahJoR345SLofyBTHtqeFjhdKjVF+hrEBTaApzUJj+4PAa8WNEgIovrNCpd23SAhNehHrM6utRP3IESPnqlEjaAAAAAElFTkSuQmCC" />
-      <div class="user-meta">
-        <div id="usernameDisplay" class="username">Khách</div>
-        <div class="small-muted">Tài khoản</div>
-      </div>
-      <div id="dropdown" class="dropdown-menu">
-        <a href="login.html">🔑 Đăng nhập</a>
-        <a href="register.html">📝 Tạo tài khoản</a>
-        <a href="add-do.html">➕ Thêm đồ</a>
-        <a href="#" onclick="logout();return false;">🚪 Đăng xuất</a>
-      </div>
+    <div class="advanced-search">
+        <div class="container">
+            <div class="advanced-search-category">
+                <span>Phân loại </span>
+                <select name="" id="advanced-search-category-select" onchange="searchProducts()">
+                    <option>Tất cả</option>
+                    <option>Món chay</option>
+                    <option>Món mặn</option>
+                    <option>Món lẩu</option>
+                    <option>Món ăn vặt</option>
+                    <option>Món tráng miệng</option>
+                    <option>Nước uống</option>
+                </select>
+            </div>
+            <div class="advanced-search-price">
+                <span>Giá từ</span>
+                <input type="number" placeholder="tối thiểu" id="min-price" onchange="searchProducts()">
+                <span>đến</span>
+                <input type="number" placeholder="tối đa" id="max-price" onchange="searchProducts()">
+                <button id="advanced-search-price-btn"><i class="fa-light fa-magnifying-glass-dollar"></i></button>
+            </div>
+            <div class="advanced-search-control">
+                <button id="sort-ascending" onclick="searchProducts(1)"><i class="fa-regular fa-arrow-up-short-wide"></i></button>
+                <button id="sort-descending" onclick="searchProducts(2)"><i class="fa-regular fa-arrow-down-wide-short"></i></button>
+                <button id="reset-search" onclick="searchProducts(0)"><i class="fa-light fa-arrow-rotate-right"></i></button>
+                <button onclick="closeSearchAdvanced()"><i class="fa-light fa-xmark"></i></button>
+            </div>
+        </div>
     </div>
-  </div>
-</header>
-
-<main class="container">
-  <div class="hero">
-    <h1>Thiết kế nên không gian sống</h1>
-    <p>Nhà là nơi để trở về là nơi bắt đầu và kết thúc một ngày trọn vẹn</p>
-  </div>
-
-  <section>
-    <h2>Bộ sưu tập</h2>
-    <p id="count" class="muted"></p>
-    <div id="productList" class="grid-products"></div>
-
-    <div class="pagination">
-      <button onclick="prevPage()">◀ Trước</button>
-      <span id="pageInfo"></span>
-      <button onclick="nextPage()">Tiếp ▶</button>
+    <main class="main-wrapper">
+        <div class="container" id="trangchu">
+            <div class="home-slider">
+                <img src="./assets/img/banner-1.png" alt="">
+                <!-- <img src="./assets/img/banner-2.png" alt="">
+                <img src="./assets/img/banner-3.png" alt="">
+                <img src="./assets/img/banner-4.png" alt="">
+                <img src="./assets/img/banner-5.png" alt=""> -->
+            </div>
+            <div class="home-service" id="home-service">
+                <div class="home-service-item">
+                    <div class="home-service-item-icon">
+                        <i class="fa-light fa-person-carry-box"></i>
+                    </div>
+                    <div class="home-service-item-content">
+                        <h4 class="home-service-item-content-h">GIAO HÀNG NHANH</h4>
+                        <p class="home-service-item-content-desc">Cho tất cả đơn hàng</p>
+                    </div>
+                </div>
+                <div class="home-service-item">
+                    <div class="home-service-item-icon">
+                        <i class="fa-light fa-shield-heart"></i>
+                    </div>
+                    <div class="home-service-item-content">
+                        <h4 class="home-service-item-content-h">SẢN PHẨM AN TOÀN</h4>
+                        <p class="home-service-item-content-desc">Cam kết chất lượng</p>
+                    </div>
+                </div>
+                <div class="home-service-item">
+                    <div class="home-service-item-icon">
+                        <i class="fa-light fa-headset"></i>
+                    </div>
+                    <div class="home-service-item-content">
+                        <h4 class="home-service-item-content-h">HỖ TRỢ 24/7</h4>
+                        <p class="home-service-item-content-desc">Tất cả ngày trong tuần</p>
+                    </div>
+                </div>
+                <div class="home-service-item">
+                    <div class="home-service-item-icon">
+                        <i class="fa-light fa-circle-dollar"></i>
+                    </div>
+                    <div class="home-service-item-content">
+                        <h4 class="home-service-item-content-h">HOÀN LẠI TIỀN</h4>
+                        <p class="home-service-item-content-desc">Nếu không hài lòng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="home-title-block" id="home-title">
+                <h2 class="home-title">Khám phá thực đơn của chúng tôi</h2>
+            </div>
+            <div class="home-products" id="home-products">
+            </div>
+            <div class="page-nav">
+                <ul class="page-nav-list">
+                </ul>
+            </div>
+        </div>
+        <div class="container" id="account-user">
+            <div class="main-account">
+                <div class="main-account-header">
+                    <h3>Thông tin tài khoản của bạn</h3>
+                    <p>Quản lý thông tin để bảo mật tài khoản</p>
+                </div>
+                <div class="main-account-body">
+                    <div class="main-account-body-col">
+                        <form action="" class="info-user">
+                            <div class="form-group">
+                                <label for="infoname" class="form-label">Họ và tên</label>
+                                <input class="form-control" type="text" name="infoname" id="infoname" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="infophone" class="form-label">Số điện thoại</label>
+                                <input class="form-control" type="text" name="infophone" id="infophone" disabled="true"
+                                    placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="infoemail" class="form-label">Email</label>
+                                <input class="form-control" type="email" name="infoemail" id="infoemail"
+                                    placeholder="Thêm địa chỉ email của bạn">
+                                <span class="inforemail-error form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="infoaddress" class="form-label">Địa chỉ</label>
+                                <input class="form-control" type="text" name="infoaddress" id="infoaddress"
+                                    placeholder="Thêm địa chỉ giao hàng của bạn">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="main-account-body-col">
+                        <form action="" class="change-password">
+                            <div class="form-group">
+                                <label for="" class="form-label w60">Mật khẩu hiện tại</label>
+                                <input class="form-control" type="password" name="" id="password-cur-info"
+                                    placeholder="Nhập mật khẩu hiện tại">
+                                <span class="password-cur-info-error form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-label w60">Mật khẩu mới </label>
+                                <input class="form-control" type="password" name="" id="password-after-info"
+                                    placeholder="Nhập mật khẩu mới">
+                                <span class="password-after-info-error form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-label w60">Xác nhận mật khẩu mới</label>
+                                <input class="form-control" type="password" name="" id="password-comfirm-info"
+                                    placeholder="Nhập lại mật khẩu mới">
+                                <span class="password-after-comfirm-error form-message"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="main-account-body-row">
+                        <div>
+                            <button id="save-info-user" onclick="changeInformation()"><i
+                                    class="fa-regular fa-floppy-disk"></i> Lưu thay đổi</button>
+                        </div>
+                        <div>
+                            <button id="save-password" onclick="changePassword()"><i class="fa-regular fa-key"></i> Đổi
+                                mật khẩu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="order-history">
+            <div class="main-account">
+                <div class="main-account-header">
+                    <h3>Quản lý đơn hàng của bạn</h3>
+                    <p>Xem chi tiết, trạng thái của những đơn hàng đã đặt.</p>
+                </div>
+                <div class="main-account-body">
+                    <div class="order-history-section">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal product-detail">
+        <button class="modal-close close-popup"><i class="fa-thin fa-xmark"></i></button>
+        <div class="modal-container mdl-cnt" id="product-detail-content">
+        </div>
     </div>
-  </section>
-</main>
-
-<!-- ===== FOOTER GIỐNG HÌNH ===== -->
-<footer class="site-footer">
-  <div class="footer-container">
-
-    <div class="footer-col">
-      <h4>Bắt đầu mua sắm</h4>
-      <a href="register.html">Đăng ký tài khoản</a>
-      <a href="#">Điều khoản bán hàng</a>
+    <div class="modal signup-login">
+        <div class="modal-container">
+            <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
+            <div class="forms mdl-cnt">
+                <div class="form-content sign-up">
+                    <h3 class="form-title">
+                        Đăng ký tài khoản
+                    </h3>
+                    <p class="form-description">Đăng ký thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng
+                        tôi </p>
+                    <form action="" class="signup-form">
+                        <div class="form-group">
+                            <label for="fullname" class="form-label">Tên đầy đủ</label>
+                            <input id="fullname" name="fullname" type="text" placeholder="VD: Nhật Sinh"
+                                class="form-control">
+                            <span class="form-message-name form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input id="phone" name="phone" type="text" placeholder="Nhập số điện thoại"
+                                class="form-control">
+                            <span class="form-message-phone form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input id="password" name="password" type="password" placeholder="Nhập mật khẩu"
+                                class="form-control">
+                            <span class="form-message-password form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                            <input id="password_confirmation" name="password_confirmation"
+                                placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+                            <span class="form-message-password-confi form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="checkbox" name="checkbox" required="" type="checkbox" id="checkbox-signup">
+                            <label for="checkbox-signup" class="form-checkbox">Tôi đồng ý với <a href="#"
+                                    title="chính sách trang web" target="_blank">chính sách trang web</a></label>
+                            <p class="form-message-checkbox form-message"></p>
+                        </div>
+                        <button class="form-submit" id="signup-button">Đăng ký</button>
+                    </form>
+                    <p class="change-login">Bạn đã có tài khoản ? <a href="javascript:;" class="login-link">Đăng nhập
+                            ngay</a></p>
+                </div>
+                <div class="form-content login">
+                    <h3 class="form-title">Đăng nhập tài khoản</h3>
+                    <p class="form-description">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng
+                        tôi</p>
+                    <form action="" class="login-form">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input id="phone-login" name="phone" type="text" placeholder="Nhập số điện thoại"
+                                class="form-control">
+                            <span class="form-message phonelog"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu"
+                                class="form-control">
+                            <span class="form-message-check-login form-message"></span>
+                        </div>
+                        <button class="form-submit" id="login-button">Đăng nhập</button>
+                    </form>
+                    <p class="change-login">Bạn chưa có tài khoản ? <a href="javascript:;" class="signup-link">Đăng kí
+                            ngay</a></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Tài khoản</h4>
-      <a href="login.html">Đăng nhập</a>
-      <a href="register.html">Tạo tài khoản</a>
-      <a href="#">Danh sách yêu thích</a>
+    <div class="modal-cart">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h3 class="cart-header-title"><i class="fa-regular fa-basket-shopping-simple"></i> Giỏ hàng</h3>
+                <button class="cart-close" onclick="closeCart()"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-body">
+                <div class="gio-hang-trong">
+                    <i class="fa-thin fa-cart-xmark"></i>
+                    <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+                </div>
+                <ul class="cart-list">
+                </ul>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-price">
+                    <p class="text-tt">Tổng tiền:</p>
+                    <p class="text-price">0đ</p>
+                </div>
+                <div class="cart-footer-payment">
+                    <button class="them-mon"><i class="fa-regular fa-plus"></i> Thêm món</button>
+                    <button class="thanh-toan disabled">Thanh toán</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Dịch vụ khách hàng</h4>
-      <a href="#">Chính sách giao hàng</a>
-      <a href="#">Phương thức thanh toán</a>
-      <a href="#">Chính sách bảo hành</a>
-      <a href="#">Chính sách đổi trả</a>
-      <a href="#">Câu hỏi thường gặp</a>
+    <div class="modal detail-order">
+        <div class="modal-container mdl-cnt">
+            <h3 class="modal-container-title">Thông tin đơn hàng</h3>
+            <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
+            <div class="detail-order-content">
+            </div>
+        </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Liên hệ</h4>
-      <p>📞 0377427739 (Hotline/Zalo)</p>
-      <p>✉️ hotro@noithat.vn</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-top-content">
+                    <div class="footer-top-img">
+                        <img src="./assets/img/vy-food.png" alt="">
+                    </div>
+                    <div class="footer-top-subbox">
+                        <div class="footer-top-subs">
+                            <h2 class="footer-top-subs-title">Đăng ký nhận tin</h2>
+                            <p class="footer-top-subs-text">Nhận thông tin mới nhất từ chúng tôi</p>
+                        </div>
+                        <form class="form-ground">
+                            <input type="email" class="form-ground-input" placeholder="Nhập email của bạn">
+                            <button class="form-ground-btn">
+                                <span>ĐĂNG KÝ</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="widget-row">
+                    <div class="widget-row-col-1">
+                        <h3 class="widget-title">Về chúng tôi</h3>
+                        <div class="widget-row-col-content">
+                            <p>Vy Food là thương hiệu được thành lập vào năm 2022 với tiêu chí đặt chất lượng sản phẩm lên hàng đầu.</p>
+                        </div>
+                        <div class="widget-social">
+                            <div class="widget-social-item">
+                                <a href="">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </div>
+                            <div class="widget-social-item">
+                                <a href="">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                            <div class="widget-social-item">
+                                <a href="">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                            <div class="widget-social-item">
+                                <a href="">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-row-col">
+                        <h3 class="widget-title">Liên kết</h3>
+                        <ul class="widget-contact">
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Về chúng tôi</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Thực đơn</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Điều khoản</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Liên hệ</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Tin tức</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget-row-col">
+                        <h3 class="widget-title">Thực đơn</h3>
+                        <ul class="widget-contact">
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Điểm tâm</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Món chay</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Món mặn</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Nước uống</span>
+                                </a>
+                            </li>
+                            <li class="widget-contact-item">
+                                <a href="">
+                                    <i class="fa-regular fa-arrow-right"></i>
+                                    <span>Tráng miệng</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget-row-col-1">
+                        <h3 class="widget-title">Liên hệ</h3>
+                        <div class="contact">
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fa-regular fa-location-dot"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <span>273 An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fa-regular fa-phone"></i>
+                                </div>
+                                <div class="contact-content contact-item-phone">
+                                    <span>0123 456 789</span>
+                                    <br>
+                                    <span>0987 654 321</span>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-item-icon">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div class="contact-content conatct-item-email">
+                                    <span>abc@domain.com</span><br />
+                                    <span>infoabc@domain.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright-wrap">
+        <div class="container">
+            <div class="copyright-content">
+                <p>Copyright 2022 Vy Food. All Rights Reserved.</p>
+            </div>
+        </div>
     </div>
+    <div class="back-to-top">
+        <a href="#"><i class="fa-regular fa-arrow-up"></i></a>
+    </div>
+    <div class="checkout-page">
+        <div class="checkout-header">
+            <div class="checkout-return">
+                <button onclick="closecheckout()"><i class="fa-regular fa-chevron-left"></i></button>
+            </div>
+            <h2 class="checkout-title">Thanh toán</h2>
+        </div>
+        <main class="checkout-section container">
+            <div class="checkout-col-left">
+                <div class="checkout-row">
+                    <div class="checkout-col-title">
+                        Thông tin đơn hàng
+                    </div>
+                    <div class="checkout-col-content">
+                        <div class="content-group">
+                            <p class="checkout-content-label">Hình thức giao nhận</p>
+                            <div class="checkout-type-order">
+                                <button class="type-order-btn active" id="giaotannoi">
+                                    <i class="fa-duotone fa-moped"
+                                        style="--fa-secondary-opacity: 1.0; --fa-primary-color: dodgerblue; --fa-secondary-color: #ffb100;"></i>
+                                    Giao tận nơi
+                                </button>
+                                <button class="type-order-btn" id="tudenlay">
+                                    <i class="fa-duotone fa-box-heart"
+                                        style="--fa-secondary-opacity: 1.0; --fa-primary-color: pink; --fa-secondary-color: palevioletred;"></i>
+                                    Tự đến lấy
+                                </button>
+                            </div>
+                        </div>
+                        <div class="content-group">
+                            <p class="checkout-content-label">Ngày giao hàng</p>
+                            <div class="date-order">
+                            </div>
+                        </div>
+                        <div class="content-group chk-ship" id="giaotannoi-group">
+                            <p class="checkout-content-label">Thời gian giao hàng</p>
+                            <div class="delivery-time">
+                                <input type="radio" name="giaongay" id="giaongay" class="radio">
+                                <label for="giaongay">Giao ngay khi xong</label>
+                            </div>
+                            <div class="delivery-time">
+                                <input type="radio" name="giaongay" id="deliverytime" class="radio">
+                                <label for="deliverytime">Giao vào giờ</label>
+                                <select class="choise-time">
+                                    <option data-hours="08" value="08:00" selected="selected">08:00 - 09:00</option>
 
-  </div>
+                                    <option data-hours="09" value="09:00">09:00 - 10:00</option>
 
-  <div class="footer-bottom">
-    © 2025 Nội Thất Store
-  </div>
-</footer>
+                                    <option data-hours="10" value="10:00"> 10:00 - 11:00</option>
 
-<script>
-let page = 1;
-const perPage = 8;
-let products = [];
-let allProducts = [];
+                                    <option data-hours="11" value="11:00"> 11:00 - 12:00</option>
 
-const sampleProducts = [
-  {id:'1',name:'SOFA GIƯỜNG CEASAR',category:'Phòng khách',price:16300000,image:'https://cdn.hstatic.net/products/200000295856/sofa-bed-_lusf09_3__8a76254ea7bd47cdb1ef460050c2a1cb.jpg'},
-  {id:'2',name:'Ghế sofa thư giãn bập bênh Malcom',category:'Phòng khách',price:5000000,image:'https://cdn.hstatic.net/products/200000295856/ghe-sofa-thu-gian-_lutg01_4__cb6fe1284358485e8f9b281d2625ccc4.jpg'},
-  {id:'3',name:'Tủ kệ TV',category:'Phòng khách',price:7500000,image:'https://product.hstatic.net/1000288788/product/o1cn01c9guot1on5hg5rfcf___2218308171749-0-cib_e190a67855104274b1251b5d92b52bc9_master.jpg'},
-  {id:'4',name:'Bàn ăn',category:'Phòng bếp',price:10500000,image:'https://ziatti.vn/web/product/extra/big/202212/b2e32d509103309c41e22b5140644ab9.jpg'},
-  {id:'5',name:'Kệ TV',category:'Phòng khách',price:3200000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3690303-ke-tv-markskel-trang-soi-jysk-5.webp'},
-  {id:'6',name:'Ghế băng',category:'Phòng khách',price:2200000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3690275-ghe-bang-vandsted-xam-jysk-2.jpg'},
-  {id:'7',name:'Đèn sàn',category:'Phòng khách',price:4500000,image:'https://jysk.vn/media/catalog/product/cache/3f678ed5a603f9b9954f4a200c4ee372/4/9/4912359-den-san-dani-mau-tu-nhien-jysk-2.webp'},
-  {id:'7',name:'Đèn bàn',category:'Phòng khách',price:890000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/4/9/4912627-den-ban-hannibal-nau-jysk-3.webp'},
-  {id:'8',name:'Đèn bàn',category:'Phòng khách',price:1200000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/4/9/4912601-den-ban-joachim-be-den-jysk-5.webp'},
-  {id:'9',name:'Nến điện',category:'Phòng khách',price:129000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/6/1/6112294-nen-dien-vile-trang-jysk-1.webp'},
-  {id:'10',name:'Chân nến',category:'Phòng khách',price:90000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/4/9/4912145-chan-nen-torlek-jysk-1.webp'},
+                                    <option data-hours="12" value="12:00"> 12:00 - 13:00</option>
 
-  {id:'11',name:'Giường Ngủ Thiết Kế Bọc Nệm Sang Trọng Regal',category:'Phòng ngủ',price:18200000,image:'https://cdn.hstatic.net/products/1000203256/giuong-ngu-sang-trong-hien-dai_9816181188ea4d2794322d60f8edac1d.jpg'},
-  {id:'12',name:'Giường Ngủ Hiện Đại Bo Cong Chân Gỗ Cloud',category:'Phòng ngủ',price:16500000,image:'https://cdn.hstatic.net/products/1000203256/giuong-ngu-bo-cong-chan-go-cloud_39378a5a862a4e85afeca86bf36d7359_1024x1024.jpg'},
-  {id:'13',name:'Giường Ngủ Thiết Kế Khối Đương Đại Vesta',category:'Phòng ngủ',price:17200000,image:'https://cdn.hstatic.net/products/1000203256/giuong-ngu-duong-dai-vesta_c85f6867d4df4461bcc28c8f1337804f.jpg'},
-  {id:'14',name:'Bàn Xoay Góc Trong Phòng Ngủ Togismart',category:'Phòng ngủ',price:4600000,image:'https://api.togihome.vn/storage/images/originals/01-blpykd4tgy90mye.webp'},
-  {id:'15',name:'Bàn Trang Điểm Gỗ Tự Nhiên Togismart ',category:'Phòng ngủ',price:2100000,image:'https://api.togihome.vn/storage/images/originals/z5577029041674-564c11c20cc9bb852da9f1bbad377c54-0mhjj5urpqbsxa0.webp'},
-  {id:'16',name:'Tủ quần áo cánh lùa tối giản, sang trọng',category:'Phòng ngủ',price:850000,image:'https://api.togihome.vn/storage/images/originals/tu-quan-ao-canh-lua-toi-gian-sang-trong-br116-8-wspdc5pkcmvs0n9.webp'},
-  {id:'17',name:'Kệ Treo Quần Áo Gỗ Tự Nhiên Hiện Đại Haigo',category:'Phòng ngủ',price:9500000,image:'https://api.togihome.vn/storage/images/originals/ke-treo-quan-ao-go-tu-nhien-hien-dai-haigo-kt375-11-igrcjn18q5wmcsg.webp'},
-  {id:'18',name:'Kệ , Tủ, Tab đầu giường thiết kế đa năng',category:'Phòng ngủ',price:1200000,image:'https://api.togihome.vn/storage/images/originals/ke-tu-tab-dau-giuong-thiet-ke-da-nang-tdg-203-4-yfkbqienz76v0vz.webp'},
-  {id:'19',name:'Kệ đầu giường thiết kế nhỏ gọn, tối ưu không gian ',category:'Phòng ngủ',price:950000,image:'https://api.togihome.vn/storage/images/originals/ke-dau-giuong-thiet-ke-nho-gon-toi-uu-khong-gian-br62-5-bxtn3hfdl8fa3qv.webp'},
-  {id:'20',name:'Kệ Gương Soi Toàn Thân TOGI Smart ',category:'Phòng ngủ',price:3980000,image:'https://api.togihome.vn/storage/images/originals/untitled-1-bwwfk1ut5v4u48x.webp'},
+                                    <option data-hours="13" value="13:00"> 13:00 - 14:00</option>
 
-  {id:'21',name:'Bàn M (Scorden)',category:'Phòng bếp',price:8800000,image:'https://product.hstatic.net/1000288788/product/743-2c54-44f4-8986-618f8bb65f7a_30c3da21e1cb4b77b753c5ef85bbd4ef_large_d472ac9ebe154c708d62c3480c75add4_master.jpg'},
-  {id:'22',name:'Bộ bàn ăn JEGIND D130 ',category:'Phòng bếp',price:10500000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/s/0/s000978-bo-ban-an-jegind-kastrup-jysk-2.webp'},
-  {id:'23',name:'Bộ bàn ăn ALSTED',category:'Phòng bếp',price:9950000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/s/3/s367272-bo-ban-an-alsted-thorup-jysk-2.webp'},
-  {id:'24',name:'Tủ phòng ăn',category:'Phòng bếp',price:6500000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3670345-tu-phong-an-lintrup-go-cong-nghiep-jysk-1.jpg'},
-  {id:'25',name:'Tủ',category:'Phòng bếp',price:4400000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3670231-tu-phong-an-gamtofte-go-cong-nghiep-jysk.webp'},
-  {id:'26',name:'Tủ ly',category:'Phòng bếp',price:8000000,image:'https://jysk.vn/media/catalog/product/cache/3f678ed5a603f9b9954f4a200c4ee372/3/6/3640231-tu-ly-lyngvig-mau-soi-jysk-1.webp'},
-  {id:'27',name:'Tủ ly',category:'Phòng bếp',price:15000000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3699013-tu-ly-markskel-trang-soi-jysk-1.webp'},
-  {id:'28',name:'Tủ bếp hiện đại gỗ công nghiệp LG',category:'Phòng bếp',price:6000000,image:'https://dogolegia.vn/wp-content/uploads/2024/03/Mau-tu-bep-dep-hien-dai-go-cong-nghiep-LG-TB115.jpg'},
-  {id:'29',name:'Thiết kế tủ bếp hiện đại gỗ công nghiệp',category:'Phòng bếp',price:900000,image:'https://dogolegia.vn/wp-content/uploads/2025/02/Mau-tu-bep-dep-hien-dai-go-cong-nghiep-LG-TB128.jpg'},
-  {id:'30',name:'Máy hút mùi gắn tường',category:'Phòng bếp',price:23000000,image:'https://hafelehome.com.vn/cdn/shop/products/533.80.203_ppic_457x431_crop_center.jpg?v=1585854553'},
+                                    <option data-hours="14" value="14:00"> 14:00 - 15:00</option>
 
-  {id:'31',name:'Bàn làm việc',category:'Văn phòng',price:2400000,image:'https://jysk.vn/media/catalog/product/cache/d95cc4c902c5b3900111a1da906a2990/3/6/3650044-ban-lam-viec-astrup-den-jysk-2.webp'},
-  {id:'32',name:'Ghế lưới Chân Xoay',category:'Văn phòng',price:900000,image:'https://st.meta.vn/Data/image/2021/11/24/ghe-luoi-hoa-phat-chan-xoay-gl119-1.jpg'},
-  {id:'33',name:'Hộc tủ di động',category:'Văn phòng',price:1000000,image:'https://st.meta.vn/Data/image/2021/11/15/Hoc-tu-di-dong-SM1830FH-1.jpg'},
-  {id:'34',name:'Tủ gỗ cánh lùa',category:'Văn phòng',price:1300000,image:'https://st.meta.vn/Data/image/2021/12/08/tu-go-canh-lua-tgl02-g.jpg'},
-  {id:'35',name:'Ghế gấp',category:'Văn phòng',price:400000,image:'https://st.meta.vn/Data/image/product_images/2013/Noithat/07/02/GG01-M1.jpg'},
-  {id:'36',name:'Hộc di động 3 ngăn',category:'Văn phòng',price:900000,image:'https://st.meta.vn/Data/image/2022/02/17/hoc-di-dong-3-ngan-hoa-phat-atm3d-g.jpg'},
-  {id:'37',name:'Ghế công thái học',category:'Văn phòng',price:140000,image:'https://st.meta.vn/Data/image/2024/11/22/ghe-cong-thai-hoc-ergonomic-warrio-pawn-series-wec106-black-9.jpg'},
-  {id:'38',name:'Bàn làm việc chân sắt',category:'Văn phòng',price:150000,image:'https://st.meta.vn/img/thumb.ashx/300x300x95/Data/image/2021/12/01/nhan-ban-tu-ban-bco12-3.jpg'},
-  {id:'39',name:'Tủ lãnh đạo phong cách Italia ',category:'Văn phòng',price:15000000,image:'https://st.meta.vn/img/thumb.ashx/300x300x95/Data/image/2021/12/08/tu-lanh-dao-lufa-fami-e02-c3200l-300.jpg'},
-  {id:'40',name:'Bộ bàn giám đốc sang trọng phong cách Italia',category:'Văn phòng',price:14000000,image:'https://st.meta.vn/Data/image/2022/01/12/bo-ban-giam-doc-fami-lufa-e02-d3223l-r-b.jpg'},
+                                    <option data-hours="15" value="15:00"> 15:00 - 16:00</option>
 
-  {id:'41',name:'Tranh Ngựa Vintage Tông Nâu',category:'Trang trí',price:600000,image:'https://cdn.hstatic.net/products/1000203256/4_0d98fd5f85a54a4e93c4821d468a81e0_1024x1024.png'},
-  {id:'42',name:'Tranh Treo Tường Phong Cách Chim Én Vintage',category:'Trang trí',price:400000,image:'https://cdn.hstatic.net/products/1000203256/2_d20c15fac9184f60b6c8913f52a9501a_1024x1024.png'},
-  {id:'43',name:'Tranh Treo Tường Khung Gỗ Vintage Abstract Birds Crane',category:'Trang trí',price:200000,image:'https://cdn.hstatic.net/products/1000203256/49_a51c548acae1420591e28d6866646e18_1024x1024.jpg'},
-  {id:'44',name:'Đèn Bàn Hình Vầng Trăng Phản Quang Halo Bowl Độc Đáo',category:'Trang trí',price:3500000,image:'https://cdn.hstatic.net/products/1000203256/o1cn01xmexhm20n3aakxk6b___2210171316893-0-cib_2e2b43b20ac54f76912ac5b791acc099_1024x1024.jpg'},
-  {id:'45',name:'Đèn Bàn Phong Cách Mạ Điện Chrome Bạc Hình Cung Tròn',category:'Trang trí',price:1200000,image:'https://cdn.hstatic.net/products/1000203256/dsc05857_copy_2_ad2d6e1e0365405b933e057360329d75_1024x1024.jpg'},
-  {id:'46',name:'Tủ Phụ Console Trang Trí Sảnh Cửa Ra Vào Phối Sọc Hình Học',category:'Trang trí',price:9890000,image:'https://cdn.hstatic.net/products/1000203256/tu-console-go-khung-sat-ben-dep_53c8c9f78cbe4b6aa91f2159813c551c_1024x1024.jpg'},
-  {id:'47',name:'Tủ Console Gỗ 6 Ngăn Kéo Dresty',category:'Trang trí',price:780000,image:'https://cdn.hstatic.net/products/1000203256/tu-console-go-6-ngan-keo-tinh-te_a30a260243594b79b09bb2276e7ee828_1024x1024.jpg'},
-  {id:'48',name:'Tủ Console Trang Trí 6 Ngăn Kéo Meridian',category:'Trang trí',price:12000000,image:'https://cdn.hstatic.net/products/1000203256/tu-console-trang-tri-phong-khach-meridian_1eaf7f60c2f44fdda68adb9d04576af1_1024x1024.jpg'},
-  {id:'49',name:'Đôn Ngồi Hình Bánh Vuông Mug',category:'Trang trí',price:1500000,image:'https://cdn.hstatic.net/products/1000203256/dsc03819_0b21e94a58804f57a7a086e22757402d_1024x1024.jpg'},
-  {id:'50',name:'Võng Canvas Tua Rua Trang Trí Võng Đơn',category:'Trang trí',price:4850000,image:'https://product.hstatic.net/1000203256/product/vong-canvas-tua-rua-trang-tri-vong-don-200x100cm__1__018e6c1b10554624a94313d54d68aba0_1024x1024.jpg'},
+                                    <option data-hours="16" value="16:00"> 16:00 - 17:00</option>
 
-  {id:'51',name:'Ghế Sofa Da Onyx Hiện Đại Tối Giản',category:'Phòng khách',price:10000000,image:'https://cdn.hstatic.net/products/1000203256/sofa-da-pu-cao-cap-onyx_80db2e4fcbf7441f8dae373f05cdbc90_1024x1024.jpg'},
-  {id:'52',name:'Tủ Tivi Hiện Đại Màu Kem Bóng Chân Gỗ',category:'Phòng khách',price:8500000,image:'https://cdn.hstatic.net/products/1000203256/tu-tivi-hien-dai-mau-kem-bong-luna-cream_6fdfe04d17d643369fd8c15532606c0a_1024x1024.jpg'},
-  {id:'53',name:'Thảm Trải Sàn Chống Thẩm',category:'Phòng khách',price:4000000,image:'https://product.hstatic.net/1000203256/product/o1cn01vkqvip1tft8so11z3___2214120405873-0-cib_4284d75929014adda4205e0b76d04cc8_1024x1024.jpg'},
-  {id:'54',name:'Tủ Rượu Decor Hightboard Oak - Màu Đen',category:'Phòng khách',price:9000000,image:'https://product.hstatic.net/1000203256/product/plmindis_1_75dd9e97d3b84d31bd720e847023d699_1024x1024.jpg'},
-  {id:'55',name:'Đồng Hồ Gỗ Treo Tường Solid Wood Có Kim Giây',category:'Phòng khách',price:500000,image:'https://product.hstatic.net/1000203256/product/dsc08810_1152c465bf7943318bf2d523dcc2c1cf_1024x1024.jpg'},
+                                    <option data-hours="17" value="17:00"> 17:00 - 18:00</option>
 
-  {id:'56',name:'Giường Ngủ Bọc Nệm Đầu Giường Hình Tam Giác',category:'Phòng ngủ',price:10000000,image:'https://cdn.hstatic.net/products/1000203256/a__7__d70872b8679c4322b20ee7f483f745f9_1024x1024.png'},
-  {id:'57',name:'Thảm Chân Giường Dệt Nổi Maillard Tông Nâu',category:'Phòng ngủ',price:400000,image:'https://product.hstatic.net/1000203256/product/dsc09846_ae7f14af601b41c6b014a39f66895eae_1024x1024.jpg'},
-  {id:'58',name:'Hệ Tủ Quần Áo Cao Trần Hiện Đại',category:'Phòng ngủ',price:40000000,image:'https://cdn.hstatic.net/products/1000203256/tu-quan-ao-hien-dai-gia-cong-theo-yeu-cau_6b3b3067706e418584ab9e2759166d4c_1024x1024.png'},
-  {id:'59',name:'Tủ Kệ Trang Trí',category:'Phòng ngủ',price:650000,image:'https://product.hstatic.net/1000203256/product/ddfc434833_001319533303000______ga03_8cf9d01a42874cb0a86d6b1735a91988_1024x1024.jpg'},
-  {id:'60',name:'Ghế Armchair Gợn Sóng Tạo Dáng chữ S Độc Đáo',category:'Phòng ngủ',price:11000000,image:'https://product.hstatic.net/1000203256/product/p1410484_a7f6eb6ea35f4d6f824352bcabbda99e_1024x1024.jpg'},
+                                    <option data-hours="18" value="18:00"> 18:00 - 19:00</option>
 
-]
+                                    <option data-hours="19" value="19:00"> 19:00 - 20:00</option>
 
-allProducts = sampleProducts;
-products = [...allProducts]; // ✅ gán dữ liệu để hiển thị sản phẩm
-function render(){
-  const start=(page-1)*perPage;
-  const list=products.slice(start,start+perPage);
-  document.getElementById('count').innerText=`Tổng số: ${products.length} sản phẩm`;
-  document.getElementById('productList').innerHTML=list.map(p=>`
-    <div class="product-card">
-      <img src="${p.image}">
-      <h3>${p.name}</h3>
-      <p>${p.category}</p>
-      <b>${p.price.toLocaleString('vi-VN')} đ</b>
-    </div>`).join('');
-  document.getElementById('pageInfo').innerText=`Trang ${page}/${Math.ceil(products.length/perPage)}`;
-}
-function filterCategory(c){
-  products = c==='all' ? [...allProducts] : allProducts.filter(p=>p.category===c);
-  page=1;
-  render();
-}
-function nextPage(){if(page*perPage<products.length){page++;render();}}
-function prevPage(){if(page>1){page--;render();}}
-function toggleDropdown(){document.getElementById('dropdown').classList.toggle('show');}
-function logout(){alert('Đã đăng xuất (demo)');}
+                                    <option data-hours="20" value="20:00"> 20:00 - 21:00</option>
 
-// ✅ Ẩn dropdown khi click ngoài
-window.onclick = function(event) {
-  if (!event.target.closest('.nav-user')) {
-    document.getElementById('dropdown').classList.remove('show');
-  }
-}
+                                    <option data-hours="21" value="21:00"> 21:00 - 22:00</option>
 
-render();
-</script>
-<script>
-// --- KIỂM TRA NGƯỜI DÙNG ĐĂNG NHẬP ---
-let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
-
-// Nếu chưa login, vẫn hiển thị "Khách"
-// Nếu muốn bắt buộc login, thêm dòng sau:
-// if(!currentUser){ location.href="login.html"; }
-
-function updateUserDisplay(){
-  const usernameDisplay = document.getElementById("usernameDisplay");
-  const dropdown = document.getElementById("dropdown");
-  if(currentUser && currentUser.username){
-    usernameDisplay.innerText = currentUser.username;
-    dropdown.innerHTML = `
-      <a href="#" onclick="logout();return false;">🚪 Đăng xuất</a>
-      <a href="add-do.html">➕ Thêm đồ</a>
-    `;
-  } else {
-    usernameDisplay.innerText = "Khách";
-    dropdown.innerHTML = `
-      <a href="login.html">🔑 Đăng nhập</a>
-      <a href="register.html">📝 Tạo tài khoản</a>
-    `;
-  }
-}
-
-// Đăng xuất
-function logout(){
-  localStorage.removeItem("currentUser");
-  currentUser = null;
-  updateUserDisplay();
-  alert("Đã đăng xuất!");
-  // Nếu muốn redirect về login: location.href="login.html";
-}
-
-// Gọi lần đầu
-updateUserDisplay();
-</script>
-
-
+                                </select>
+                            </div>
+                        </div>
+                        <div class="content-group" id="tudenlay-group">
+                            <p class="checkout-content-label">Lấy hàng tại chi nhánh</p>
+                            <div class="delivery-time">
+                                <input type="radio" name="chinhanh" id="chinhanh-1" class="radio">
+                                <label for="chinhanh-1">273 An Dương Vương, Phường 3, Quận 5</label>
+                            </div>
+                            <div class="delivery-time">
+                                <input type="radio" name="chinhanh" id="chinhanh-2" class="radio">
+                                <label for="chinhanh-2">04 Tôn Đức Thắng, Phường Bến Nghé, Quận 1</label>
+                            </div>
+                        </div>
+                        <div class="content-group">
+                            <p class="checkout-content-label">Ghi chú đơn hàng</p>
+                            <textarea type="text" class="note-order" placeholder="Nhập ghi chú"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-row">
+                    <div class="checkout-col-title">
+                        Thông tin người nhận
+                    </div>
+                    <div class="checkout-col-content">
+                        <div class="content-group">
+                            <form action="" class="info-nhan-hang">
+                                <div class="form-group">
+                                    <input id="tennguoinhan" name="tennguoinhan" type="text"
+                                        placeholder="Tên người nhận" class="form-control">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input id="sdtnhan" name="sdtnhan" type="text" placeholder="Số điện thoại nhận hàng"
+                                        class="form-control">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input id="diachinhan" name="diachinhan" type="text" placeholder="Địa chỉ nhận hàng"
+                                        class="form-control chk-ship">
+                                    <span class="form-message"></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-col-right">
+                <p class="checkout-content-label">Đơn hàng</p>
+                <div class="bill-total" id="list-order-checkout">
+                </div>
+                <div class="bill-payment">
+                    <div class="total-bill-order">
+                    </div>
+                    <div class="policy-note">
+                        Bằng việc bấm vào nút “Đặt hàng”, tôi đồng ý với
+                        <a href="#" target="_blank">chính sách hoạt động</a>
+                        của chúng tôi.
+                    </div>
+                </div>
+                <div class="total-checkout">
+                    <div class="text">Tổng tiền</div>
+                    <div class="price-bill">
+                        <div class="price-final" id="checkout-cart-price-final">0</div>
+                    </div>
+                </div>
+                <button class="complete-checkout-btn">Đặt hàng</button>
+            </div>
+        </main>
+    </div>
+    <div id="toast"></div>
+    <script src="./js/initialization.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/checkout.js"></script>
+    <script src="./js/toast-message.js"></script>
 </body>
 </html>
