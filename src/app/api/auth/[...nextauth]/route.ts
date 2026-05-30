@@ -33,7 +33,7 @@ async function getUsers(): Promise<User[]> {
 
   if (useSupabase && supabase) {
     try {
-      const { data } = await supabase.from<User>("users").select("*");
+      const { data } = await supabase.from<"users", any>("users").select("*");
       const supaUsers = data || [];
       const map = new Map<string, User>();
       fileUsers.forEach((u) => map.set(u.username, u));
