@@ -1,50 +1,51 @@
-import { NextResponse } from "next/server";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-type User = {
-  fullName: string;
-  username: string;
-  password: string;
-  phone?: string;
+export const authOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.username || !credentials?.password) {
+          throw new Error("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.");
+        }
+
+        // Lấy danh sách users từ bộ nhớ RAM toàn cục (đã đồng bộ với bên Register)
+        const users = (global as any).globalUsers || [];
+
+        // Tìm xem tài khoản có tồn tại và khớp mật khẩu không
+        const user = users.find(
+          (u: any) =>
+            u.username === credentials.username && u.password === credentials.password
+        );
+
+        // Nếu tìm thấy tài khoản hợp lệ, trả về thông tin để NextAuth xử lý session
+        if (user) {
+          return {
+            id: user.username,
+            name: user.fullName,
+            email: user.username,
+          };
+        }
+
+        // Nếu sai thông tin, ném ra thông báo lỗi hiển thị lên giao diện công cộng
+        throw new Error("Tên đăng nhập hoặc mật khẩu không chính xác!");
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/login", // Đường dẫn trang đăng nhập của bạn
+  },
+  session: {
+    strategy: "jwt" as const,
+  },
+  secret: process.env.NEXTAUTH_SECRET || "bi_mat_sieu_bao_mat_cua_massimo_restaurant",
 };
 
-// Khởi tạo một mảng toàn cục trong bộ nhớ RAM để lưu danh sách user tạm thời
-// Có sẵn 1 tài khoản admin để bạn test đăng nhập nếu cần
-if (!(global as any).globalUsers) {
-  (global as any).globalUsers = [
-    { fullName: "Tú Trinh", username: "trinh", password: "123", phone: "0123456789" }
-  ];
-}
+const handler = NextAuth(authOptions);
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const { fullName, username, password, phone } = body;
-
-  if (!fullName || !username || !password) {
-    return NextResponse.json(
-      { message: "Vui lòng điền đầy đủ họ tên, tên đăng nhập và mật khẩu." },
-      { status: 400 }
-    );
-  }
-
-  try {
-    // Lấy danh sách users từ bộ nhớ RAM ra để kiểm tra thay vì đọc file JSON
-    const users: User[] = (global as any).globalUsers;
-
-    if (users.some((user) => user.username === username)) {
-      return NextResponse.json(
-        { message: "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác." },
-        { status: 409 }
-      );
-    }
-
-    // Đẩy user mới vào mảng RAM công cộng
-    users.push({ fullName, username, password, phone });
-
-    return NextResponse.json({ message: "Đăng ký thành công!" }, { status: 201 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Lỗi máy chủ khi đăng ký. Vui lòng thử lại." },
-      { status: 500 }
-    );
-  }
-}
+export { handler as GET, handler as POST };
