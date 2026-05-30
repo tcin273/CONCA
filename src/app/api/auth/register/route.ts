@@ -1,8 +1,4 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
-
-const usersPath = path.join(process.cwd(), "src", "app", "api", "auth", "users.json");
 
 type User = {
   fullName: string;
@@ -10,6 +6,14 @@ type User = {
   password: string;
   phone?: string;
 };
+
+// Khởi tạo một mảng toàn cục trong bộ nhớ RAM để lưu danh sách user tạm thời
+// Có sẵn 1 tài khoản admin để bạn test đăng nhập nếu cần
+if (!(global as any).globalUsers) {
+  (global as any).globalUsers = [
+    { fullName: "Tú Trinh", username: "trinh", password: "123", phone: "0123456789" }
+  ];
+}
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -23,8 +27,8 @@ export async function POST(request: Request) {
   }
 
   try {
-    const file = await fs.readFile(usersPath, "utf8");
-    const users: User[] = JSON.parse(file || "[]");
+    // Lấy danh sách users từ bộ nhớ RAM ra để kiểm tra thay vì đọc file JSON
+    const users: User[] = (global as any).globalUsers;
 
     if (users.some((user) => user.username === username)) {
       return NextResponse.json(
@@ -33,8 +37,8 @@ export async function POST(request: Request) {
       );
     }
 
+    // Đẩy user mới vào mảng RAM công cộng
     users.push({ fullName, username, password, phone });
-    await fs.writeFile(usersPath, JSON.stringify(users, null, 2), "utf8");
 
     return NextResponse.json({ message: "Đăng ký thành công!" }, { status: 201 });
   } catch (error) {
