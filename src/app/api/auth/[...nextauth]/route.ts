@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { promises as fs } from "fs";
 import path from "path";
+import bcrypt from "bcryptjs";
+import { createClient } from "@supabase/supabase-js";
 
 const usersPath = path.join(process.cwd(), "src", "app", "api", "auth", "users.json");
 
@@ -13,12 +15,43 @@ type User = {
 };
 
 async function getUsers(): Promise<User[]> {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
+  const useSupabase = Boolean(supabaseUrl && supabaseKey);
+  const supabase = useSupabase ? createClient(supabaseUrl as string, supabaseKey as string) : null;
+
+  let fileUsers: User[] = [];
   try {
     const file = await fs.readFile(usersPath, "utf8");
-    return JSON.parse(file || "[]");
+    fileUsers = JSON.parse(file || "[]");
   } catch {
-    return [];
+    fileUsers = [];
   }
+
+  const g: any = global as any;
+  const globalUsers: User[] = g.globalUsers || [];
+
+  if (useSupabase && supabase) {
+    try {
+      const { data } = await supabase.from<User>("users").select("*");
+      const supaUsers = data || [];
+      const map = new Map<string, User>();
+      fileUsers.forEach((u) => map.set(u.username, u));
+      globalUsers.forEach((u) => map.set(u.username, u));
+      supaUsers.forEach((u) => map.set(u.username, u));
+      return Array.from(map.values());
+    } catch {
+      const map = new Map<string, User>();
+      fileUsers.forEach((u) => map.set(u.username, u));
+      globalUsers.forEach((u) => map.set(u.username, u));
+      return Array.from(map.values());
+    }
+  }
+
+  const map = new Map<string, User>();
+  fileUsers.forEach((u) => map.set(u.username, u));
+  globalUsers.forEach((u) => map.set(u.username, u));
+  return Array.from(map.values());
 }
 
 const handler = NextAuth({
@@ -35,20 +68,28 @@ const handler = NextAuth({
         }
 
         const users = await getUsers();
-        const user = users.find(
-          (item) =>
-            item.username === credentials.username &&
-            item.password === credentials.password
-        );
+        const candidate = users.find((item) => item.username === credentials.username);
+        if (!candidate) return null;
 
-        if (!user) {
-          return null;
+        const stored = candidate.password || "";
+        let ok = false;
+        try {
+          if (stored.startsWith("$2")) {
+            ok = await bcrypt.compare(credentials.password, stored);
+          } else {
+            // legacy plain-text fallback
+            ok = stored === credentials.password;
+          }
+        } catch {
+          ok = false;
         }
 
+        if (!ok) return null;
+
         return {
-          id: user.username,
-          name: user.fullName,
-          username: user.username,
+          id: candidate.username,
+          name: candidate.fullName,
+          username: candidate.username,
         };
       }
     })

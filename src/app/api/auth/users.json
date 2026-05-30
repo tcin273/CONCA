@@ -2,19 +2,25 @@
   {
     "fullName": "admin",
     "username": "admin",
-    "password": "123",
+    "password": "$2b$10$6Buj/Mc4AaknNoAoay1xvOEF/Gg770Y/Q5FMvp9cjHPf.4.11feGO",
     "phone": ""
   },
   {
     "fullName": "si",
     "username": "si",
-    "password": "123",
+    "password": "$2b$10$te3sAj8rdJvGxpJx/TPbq.Fo.YdMi91s0dbmom8LWWEd8.xbK7.xa",
     "phone": "0987654321"
   },
   {
     "fullName": "si",
     "username": "si ",
-    "password": "123",
+    "password": "$2b$10$D2S6b/dTEouQQQu8jMgRCemRTiAfyAQWc5x.B3iyygxW6iXiNCrdO",
+    "phone": ""
+  },
+  {
+    "fullName": "hi",
+    "username": "hi",
+    "password": "$2b$10$S5V9H1F4pUahWyEmQDnsIOqTXV7gLXVlcUk7qSsfOFVbyLUE3l0q.",
     "phone": ""
   }
 ]
