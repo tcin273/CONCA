@@ -2,16 +2,15 @@ import { promises as fs } from "fs";
 import path from "path";
 import { createClient } from "@supabase/supabase-js";
 
+const useSupabase = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
+const supabase = useSupabase && supabaseUrl && supabaseKey ? createClient(supabaseUrl as string, supabaseKey as string) : null;
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const ordersPath = path.join(process.cwd(), "src", "app", "api", "orders", "orders.json");
-
-
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
-const useSupabase = Boolean(supabaseUrl && supabaseKey);
-const supabase = useSupabase ? createClient(supabaseUrl as string, supabaseKey as string) : null;
 
     // If Supabase configured, try to insert there first (recommended for Vercel)
     if (useSupabase && supabase) {
