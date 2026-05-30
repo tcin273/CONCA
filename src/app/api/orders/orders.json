@@ -1,0 +1,96 @@
+[
+  {
+    "id": "1779452788215",
+    "createdAt": "2026-05-22T12:26:28.215Z",
+    "customerName": "si ",
+    "email": "",
+    "phone": "09999",
+    "address": "hi",
+    "note": "",
+    "items": [
+      {
+        "id": 201,
+        "title": "Spaghetti Carbonara",
+        "price": 99,
+        "img": "/temporary/p14.png",
+        "quantity": 1
+      },
+      {
+        "id": 102,
+        "title": "Mediterranean Delight",
+        "price": 329,
+        "img": "/temporary/p8.png",
+        "quantity": 1
+      }
+    ],
+    "totalPrice": 428,
+    "status": "Đã hủy",
+    "cancelReason": "kvbygukjb",
+    "cancelledAt": "2026-05-22T14:57:09.112Z"
+  },
+  {
+    "id": "1779453166862",
+    "createdAt": "2026-05-22T12:32:46.862Z",
+    "customerName": "hi",
+    "email": "",
+    "phone": "0",
+    "address": "hiih",
+    "note": "",
+    "items": [
+      {
+        "id": 301,
+        "title": "Classic Beef Burger",
+        "price": 70,
+        "img": "/temporary/p2.png",
+        "quantity": 1
+      }
+    ],
+    "totalPrice": 70
+  },
+  {
+    "id": "1779454382002",
+    "createdAt": "2026-05-22T12:53:02.002Z",
+    "customerName": "hi",
+    "email": "",
+    "phone": "0923",
+    "address": "dnioenioi",
+    "note": "",
+    "items": [
+      {
+        "id": 302,
+        "title": "Bacon Cheese Burger",
+        "price": 70,
+        "img": "/temporary/p5.png",
+        "quantity": 1
+      },
+      {
+        "id": 201,
+        "title": "Spaghetti Carbonara",
+        "price": 99,
+        "img": "/temporary/p14.png",
+        "quantity": 1
+      }
+    ],
+    "totalPrice": 169
+  },
+  {
+    "id": "1779462346036",
+    "createdAt": "2026-05-22T15:05:46.036Z",
+    "username": "si",
+    "customerName": "hi",
+    "email": "",
+    "phone": "u89y9",
+    "address": "snhcfioan",
+    "note": "",
+    "items": [
+      {
+        "id": 301,
+        "title": "Classic Beef Burger",
+        "price": 70,
+        "img": "/temporary/p2.png",
+        "quantity": 1
+      }
+    ],
+    "totalPrice": 70
+  }
+]
