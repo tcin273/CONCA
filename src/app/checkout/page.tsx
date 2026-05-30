@@ -88,9 +88,9 @@ const CheckoutPage = () => {
             <div className="space-y-4">
               {cartItems.map((item) => (
                 <div key={`${item.id}-${item.option ?? "default"}`} className="flex items-center gap-4 rounded-2xl bg-white p-3 shadow-sm">
-                  <div className="h-20 w-20 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
+                  <div className="relative h-20 w-20 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
                     {item.img ? (
-                      <img src={item.img} alt={item.title} className="h-full w-full object-cover" />
+                      <Image src={item.img} alt={item.title} fill className="object-cover" />
                     ) : (
                       <div className="flex h-full items-center justify-center text-sm text-gray-500">No image</div>
                     )}
