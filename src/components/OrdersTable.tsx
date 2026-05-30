@@ -21,6 +21,7 @@ type Order = {
   items?: OrderItem[];
   totalPrice?: number;
   status?: string;
+  cancelReason?: string;
 };
 
 type OrdersTableProps = {
