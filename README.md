@@ -96,3 +96,5 @@ Nếu dự án hoạt động không đúng do xung đột gói cài đặt cũ,
 
 * Đối với máy Windows (PowerShell): Remove-Item -Recurse -Force node_modules, package-lock.json; npm install
 * Đối với máy Linux hoặc macOS: rm -rf node_modules package-lock.json && npm install
+* 1.	Link github: https://github.com/tcin273/CONCA.git
+  2.	Link deloy vercel: https://massimo-conca.vercel.app/
